@@ -1,0 +1,25 @@
+﻿@model Customer
+
+<div class="alert alert-primary display-3 fw-bold text-center">Details</div>
+<dl class="row">
+    <dt class="col-3">@Html.DisplayNameFor(p => p.Id)</dt>
+    <dd class="col-9">@Model.Id</dd>
+
+    <dt class="col-3">@Html.DisplayNameFor(p => p.FullName)</dt>
+    <dd class="col-9">@Model.FullName</dd>
+
+    <dt class="col-3">@Html.DisplayNameFor(p => p.PhoneNumber)</dt>
+    <dd class="col-9">@Model.PhoneNumber</dd>
+
+    <dt class="col-3">@Html.DisplayNameFor(p => p.Description)</dt>
+    <dd class="col-9">@Model.Description</dd>
+    <dt class="col-3"><label asp-for="MyRestaurantId"></label></dt>
+    <dd class="col-9">
+        <a asp-controller="MyRestaurants" asp-action="Details" asp-route-id="@Model.MyRestaurantId">
+            @Model.MyRestaurant.FullName (@Model.MyRestaurant.Description)
+        </a>
+    </dd>
+
+
+</dl>
+<a asp-controller="Customers" asp-action="GetIndexView">Back to list</a>

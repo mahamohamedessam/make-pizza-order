@@ -1,0 +1,97 @@
+﻿@model List<Customer>
+<h1 >
+    <div class="alert alert-warning display-3 text-center"> 
+    Our Customers
+    </div>
+</h1>
+
+<form method="get"  asp-controller="Customers" asp-action="GetIndexView" > 
+    <div class="input-group">
+        <input  type="text" name="search" value="@ViewBag.CurrentSearch"/>
+        <button type="submit" class="btn btn-secondary input-group-append">
+            <i class="bi bi-search"></i>
+        </button>
+
+    </div>
+    <input hidden name="ResId" value="@ViewBag.CurrentResId" />
+</form>
+
+ <form method="get" asp-controller="Customers" asp-action="GetIndexView" >
+       <select class="form-control"  name="ResId" onchange="this.form.submit()"
+            asp-items="@(new SelectList( ViewBag.AllRestaurants ,"Id","FullName",@ViewBag.CurrentResId))">
+           <option value="0">All menu</option>
+       </select>
+    <input hidden name="search" value="@ViewBag.CurrentSearch" />
+ </form>
+
+
+
+<tbody>
+
+
+
+    <table class="table table-bordered table-striped table-hover   ">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+
+
+                <th>
+
+                    <div style="float:left; width:50%; text-align:left">
+                        Full Name
+
+                    </div>
+                    <div style="width:50%; float:right; text-align:right">
+                        <a asp-controller="Customers" asp-action="GetIndexView" asp-route-sortType="FullName" asp-route-SortOrder="asc" asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-deptId="@ViewBag.CurrentResId" style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Customers" asp-action="GetIndexView" asp-route-sortType="FullName" asp-route-SortOrder="desc" asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-deptId="@ViewBag.CurrentResId" style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+
+
+                </th>
+                <th>PhoneNumber</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.Id</td>
+                <td>@item.FullName</td>
+                @*<td>@item.Description</td>*@
+                <td>@item.PhoneNumber</td>
+
+                <td>
+                    <a asp-controller="Customers" asp-action="GetDetailsView" asp-route-id="@item.Id"
+                   class="btn btn-outline-success">
+                        <i class="bi bi-list-ul"></i>
+                    </a>&nbsp;
+                </td>
+                <td>
+                    <a asp-controller="Customers" asp-action="GetEditView" asp-route-id="@item.Id"
+                   class="btn btn-outline-warning">
+
+                        <i class="bi bi-pencil-square"></i>
+                    </a>&nbsp;
+                </td>
+                <td>
+                    <a asp-controller="Customers" asp-action="GetDeleteView" asp-route-id="@item.Id"
+                   class="btn btn-outline-warning">
+
+                        <i class="bi bi-trash3"></i>
+                    </a>&nbsp;
+                </td>
+            </tr>
+        }
+</tbody>
+
+</table>
+

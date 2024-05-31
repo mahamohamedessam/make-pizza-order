@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ITI_ITI.Models.MyRestaurant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 >
+    <div class="alert alert-warning display-3 text-center"> 
+    The menu
+    </div>
+</h1
+
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-success ">Add pizza</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none"><i class="bi bi-list-ul"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class= "text-decoration-none"><i class="bi bi-pencil-square"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-decoration-none "><i class="bi bi-trash3"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
